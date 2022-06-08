@@ -45,13 +45,6 @@ contract Loterry is VRFConsumerBase{
     }
      function fulfillRandomness(bytes32 requestId,uint256 randomness) internal override {
         randomResult=randomness;
-       
-        
-    }
-    function pickwinner() public{
-        require(msg.sender==manager);
-        require (players.length>=1);
-        getRandomNumber();
         address payable winner;
         winner=players[randomResult%players.length];
         uint managercut=(getBalance()*10)/100;
@@ -59,6 +52,14 @@ contract Loterry is VRFConsumerBase{
         winner.transfer(winnerprize);
         payable(manager).transfer(managercut);
         players=new address payable[](0); 
+       
+        
+    }
+    function pickwinner() public{
+        require(msg.sender==manager);
+        require (players.length>=1);
+        getRandomNumber();
+      
 
     }
    function transferERC20(IERC20 token, address to, uint256 amount) public {
