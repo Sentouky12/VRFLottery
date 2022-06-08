@@ -62,13 +62,7 @@ contract Loterry is VRFConsumerBase{
       
 
     }
-   function transferERC20(IERC20 token, address to, uint256 amount) public {
-        require(msg.sender == manager, "Only owner can withdraw funds"); 
-        uint256 erc20balance = token.balanceOf(address(this));
-        require(amount <= erc20balance, "balance is low");
-        token.transfer(to, amount*10**18);
-     
-    } 
+   
 
      function withdrawLink(address to, uint amount) external {
        IERC20 token=IERC20(0x01BE23585060835E02B77ef475b0Cc51aA1e0709);
